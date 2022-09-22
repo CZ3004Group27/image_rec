@@ -25,6 +25,9 @@ imagerec_path = get_path_to(imagerec)
 best_pt_path = model_weights_folder.joinpath(best_pt_filename)
 model = torch.hub.load(str(imagerec_path), 'custom', path=str(best_pt_path), source='local') # local model dont need internet
 
+def get_image_from(image_path: str):
+    return Image.open(image_path)
+
 #Function for single prediction
 def infer(img) -> str:
     # Do not touch the categories
@@ -47,7 +50,7 @@ def infer(img) -> str:
 
 # unittest, or when running this file using `os.popen(python...)`
 if __name__ == "__main__":
-    image = sys.argv[1]
-    img = Image.open(image)
+    image_path = sys.argv[1]
+    img = get_image_from(image_path)
     res = infer(img)
-    print(res)
+    print(res, end="")
