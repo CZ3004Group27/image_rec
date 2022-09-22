@@ -53,4 +53,4 @@ if __name__ == "__main__":
     image_path = sys.argv[1]
     img = get_image_from(image_path)
     res = infer(img)
-    print(res, end="")
+    print(res, end="") # do not add \n to result
