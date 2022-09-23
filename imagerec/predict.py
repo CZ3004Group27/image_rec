@@ -35,9 +35,11 @@ def merge_image():
     save_path = predicted_folder + 'merged_image.jpg'
     merged_image.save(save_path)
 
-def predict(image_path):
-    weight_path = str(best_pt_path)
-    os.system(f'python -m imagerec.detect --weights {weight_path} --img 640 --source {image_path}')
+
+def predict():
+    weight_path = './final/weights/best.pt'
+    image_path = sys.argsv[1]
+    os.system(f'python ./final/detect.py --weights {weight_path} --img 640 --source {image_path}')
     merge_image()
 
 if __name__ == "__main__":
