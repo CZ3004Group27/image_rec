@@ -1,9 +1,21 @@
 import os
 from PIL import Image
+import imagerec.runs.detect
+from imagerec import weights
+import time
 import sys
 
+from imagerec.helpers import get_path_to
+
+# Set up all the parameters here
+best_pt_filename = "best.pt"
+
+detect_folder = get_path_to(imagerec.runs.detect)
+model_weights_folder = get_path_to(weights)
+best_pt_path = model_weights_folder.joinpath(best_pt_filename)
+
 def merge_image():
-    predicted_folder = './final/runs/detect/'
+    predicted_folder = str(detect_folder)
     predicted_folder = predicted_folder+os.listdir(predicted_folder)[-1] + '/'
     images_names = os.listdir(predicted_folder)
 
@@ -23,10 +35,14 @@ def merge_image():
     save_path = predicted_folder + 'merged_image.jpg'
     merged_image.save(save_path)
 
+
 def predict():
     weight_path = './final/weights/best.pt'
     image_path = sys.argsv[1]
     os.system(f'python ./final/detect.py --weights {weight_path} --img 640 --source {image_path}')
     merge_image()
 
-predict()
+if __name__ == "__main__":
+    image_path = sys.argv[1]
+    res = predict(image_path)
+    print(res, end="")

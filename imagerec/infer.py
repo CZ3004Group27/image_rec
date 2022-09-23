@@ -10,14 +10,10 @@ import cv2
 from matplotlib import pyplot as plt
 import time
 import sys
-from pathlib import Path
+from imagerec.helpers import get_path_to
 
 # Set all the parameters here
 best_pt_filename = "best.pt"
-
-def get_path_to(package) -> Path:
-    """Get path to directory holding a package's __init__.py file"""
-    return Path(package.__path__[0])
 
 model_weights_folder = get_path_to(weights)
 imagerec_path = get_path_to(imagerec)
