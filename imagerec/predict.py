@@ -1,6 +1,5 @@
 import os
 from PIL import Image
-import time
 import sys
 
 def merge_image():
@@ -26,8 +25,8 @@ def merge_image():
 
 def predict():
     weight_path = './final/weights/best.pt'
-    image_path = sys.argv[1]
+    image_path = sys.argsv[1]
     os.system(f'python ./final/detect.py --weights {weight_path} --img 640 --source {image_path}')
-    # merge_image()
+    merge_image()
 
 predict()

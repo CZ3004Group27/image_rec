@@ -46,6 +46,8 @@ def infer(img) -> str:
                 index = i
         return category[int(output[index][0][-1])]
     # print(float(output[0][0][4])) # conf score
+    if len(output[0]) == 0:
+        return 'Nothing detected'
     return category[int(output[0][0][-1])]
 
 # unittest, or when running this file using `os.popen(python...)`
