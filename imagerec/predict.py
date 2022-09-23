@@ -4,24 +4,46 @@ import imagerec.runs.detect
 from imagerec import weights
 import time
 import sys
+from pathlib import Path
 
 from imagerec.helpers import get_path_to
 
 # Set up all the parameters here
 best_pt_filename = "best.pt"
 
-detect_folder = get_path_to(imagerec.runs.detect)
-model_weights_folder = get_path_to(weights)
-best_pt_path = model_weights_folder.joinpath(best_pt_filename)
+detect_folder: Path = get_path_to(imagerec.runs.detect)
+model_weights_folder: Path = get_path_to(weights)
+best_pt_path: Path = model_weights_folder.joinpath(best_pt_filename)
+
+def get_exp_number_from_foldername(exp_name: str) -> int:
+    """Get the experiment number from the experiment name
+    
+    Experiment names are: "exp", "exp2", "exp3", ect
+    """
+    int_string = exp_name[3:]
+    if int_string == "":
+        return 1
+    else:
+        return int(int_string)
+
+def get_exp_number_from_folderpath(folderpath: Path) -> int:
+    """Get the experiment number from the experiment folder path
+    
+    Experiment names are: exp, exp2, exp3, ect
+    """
+    return get_exp_number_from_foldername(folderpath.name)
+
+def get_latest_exp_folder_from_detect(detectpath: Path) -> Path:
+    """Get the latest exp folder. This is the exp with largest integer label"""
+    return sorted(detectpath.glob("exp*"), key=get_exp_number_from_folderpath)[-1]
 
 def merge_image():
-    predicted_folder = str(detect_folder)
-    predicted_folder = predicted_folder+os.listdir(predicted_folder)[-1] + '/'
+    predicted_folder = get_latest_exp_folder_from_detect(detect_folder)
     images_names = os.listdir(predicted_folder)
 
     images = []
     for imageName in images_names:
-        imageLocation = predicted_folder + imageName
+        imageLocation = predicted_folder.joinpath(imageName)
         img = Image.open(imageLocation)
         images.append(img)
     
@@ -32,13 +54,14 @@ def merge_image():
     for i in range(size):
         merged_image.paste(images[i], (i*width,0))
 
-    save_path = predicted_folder + 'merged_image.jpg'
+    save_path = predicted_folder.joinpath('merged_image.jpg')
     merged_image.save(save_path)
 
 
 def predict(image_path):
     weight_path = str(best_pt_path)
-    os.system(f'python ./final/detect.py --weights {weight_path} --img 640 --source {image_path}')
+    os.system(f'python -m imagerec.detect --weights {weight_path} --img 640 --source {image_path}')
+    print('merging image')
     merge_image()
 
 if __name__ == "__main__":
