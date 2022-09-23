@@ -37,8 +37,8 @@ def merge_image():
 
 def predict(image_path):
     weight_path = str(best_pt_path)
-    res = os.system(f'python -m imagerec.detect --weights {weight_path} --img 640 --source {image_path}').read()
-    # merge_image()
+    os.system(f'python -m imagerec.detect --weights {weight_path} --img 640 --source {image_path}')
+    merge_image()
 
 if __name__ == "__main__":
     image_path = sys.argv[1]
