@@ -5,4 +5,4 @@ __pycache__/
 *.egg-info
 
 # ignore exps
-imagerec/runs/detect/*.jpg
+imagerec/runs/detect/**/*.jpg
