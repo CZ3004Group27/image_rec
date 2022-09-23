@@ -31,8 +31,8 @@ def get_image_from(image_path: str):
 #Function for single prediction
 def infer(img) -> str:
     # Do not touch the categories
-    category = ['Alphabet A', 'Alphabet B', 'Alphabet C', 'Alphabet D', 'Alphabet E', 'Alphabet F', 'Alphabet G', 'Alphabet H', 'Alphabet S', 'Alphabet T', 'Alphabet U', 'Alphabet V', 'Alphabet W',
-                'Alphabet X', 'Alphabet Y', 'Alphabet Z', 'Bulls Eye', 'Down Arrow', 'Eight', 'Five', 'Four', 'Left Arrow', 'Nine', 'One', 'Right Arrow', 'Seven', 'Six', 'Stop', 'Three', 'Two', 'Up Arrow']
+    category = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'S', 'T', 'U', 'V', 'W',
+                'X', 'Y', 'Z', 'Bullseye', 'Down', 'Eight', 'Five', 'Four', 'Left', 'Nine', 'One', 'Right', 'Seven', 'Six', 'Stop', 'Three', 'Two', 'Up']
 
     output = model(img).pred
     if len(output) > 1:
