@@ -3,3 +3,6 @@ __pycache__/
 
 # package builds
 *.egg-info
+
+# ignore exps
+imagerec/runs/detect/*.jpg

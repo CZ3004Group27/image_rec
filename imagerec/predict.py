@@ -17,7 +17,7 @@ best_pt_path: Path = model_weights_folder.joinpath(best_pt_filename)
 
 def get_exp_number_from_foldername(exp_name: str) -> int:
     """Get the experiment number from the experiment name
-    
+
     Experiment names are: "exp", "exp2", "exp3", ect
     """
     int_string = exp_name[3:]
@@ -28,7 +28,7 @@ def get_exp_number_from_foldername(exp_name: str) -> int:
 
 def get_exp_number_from_folderpath(folderpath: Path) -> int:
     """Get the experiment number from the experiment folder path
-    
+
     Experiment names are: exp, exp2, exp3, ect
     """
     return get_exp_number_from_foldername(folderpath.name)
@@ -46,7 +46,7 @@ def merge_image():
         imageLocation = predicted_folder.joinpath(imageName)
         img = Image.open(imageLocation)
         images.append(img)
-    
+
     size = len(images)
     width = images[0].width
     height = images[0].height
@@ -60,7 +60,7 @@ def merge_image():
 
 def predict(image_path):
     weight_path = str(best_pt_path)
-    os.system(f'python -m imagerec.detect --weights {weight_path} --img 640 --source {image_path}')
+    os.system(f'python -m imagerec.detect --weights "{weight_path}" --img 640 --source {image_path}')
     print('merging image')
     merge_image()
 
