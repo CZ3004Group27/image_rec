@@ -37,7 +37,7 @@ def merge_image():
 
 
 def predict(image_path):
-    weight_path = './final/weights/best.pt'
+    weight_path = str(best_pt_path)
     os.system(f'python ./final/detect.py --weights {weight_path} --img 640 --source {image_path}')
     merge_image()
 
