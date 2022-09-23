@@ -43,5 +43,4 @@ def predict(image_path):
 
 if __name__ == "__main__":
     image_path = sys.argv[1]
-    res = predict(image_path)
-    print(res, end="")
+    predict(image_path)
