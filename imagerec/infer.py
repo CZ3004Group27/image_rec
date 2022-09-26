@@ -29,17 +29,11 @@ def infer(img) -> str:
     # Do not touch the categories
     category = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'S', 'T', 'U', 'V', 'W',
                 'X', 'Y', 'Z', 'Bullseye', 'Down', 'Eight', 'Five', 'Four', 'Left', 'Nine', 'One', 'Right', 'Seven', 'Six', 'Stop', 'Three', 'Two', 'Up']
-
     output = model(img).pred
-    res = []
-    for i in range(len(output[0])):
-        res.append(category[int(output[0][i][-1])])
     # print(float(output[0][0][4])) # conf score
-    if len(output[0]) == 0:
-        return 'Nothing detected'
-    return res
+    return [category[int(output[0][i][-1])] for i in range(len(output[0]))] if len(output[0]) else 'Nothing detected'
 
-# unittest, or when running this file using `os.popen(python...)`
+# unit-test, or when running this file using `os.popen(python...)`
 if __name__ == "__main__":
     image_path = sys.argv[1]
     img = get_image_from(image_path)
