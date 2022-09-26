@@ -31,20 +31,13 @@ def infer(img) -> str:
                 'X', 'Y', 'Z', 'Bullseye', 'Down', 'Eight', 'Five', 'Four', 'Left', 'Nine', 'One', 'Right', 'Seven', 'Six', 'Stop', 'Three', 'Two', 'Up']
 
     output = model(img).pred
-    if len(output) > 1:
-        max_area, index = 0, 0
-        for i, op in enumerate(output):
-            length = op[0][2] - op[0][0]
-            width = op[0][3] - op[0][1]
-            area = length*width
-            if area > max_area:
-                max_area = area
-                index = i
-        return category[int(output[index][0][-1])]
+    res = []
+    for i in range(len(output[0])):
+        res.append(category[int(output[0][i][-1])])
     # print(float(output[0][0][4])) # conf score
     if len(output[0]) == 0:
         return 'Nothing detected'
-    return category[int(output[0][0][-1])]
+    return res
 
 # unittest, or when running this file using `os.popen(python...)`
 if __name__ == "__main__":
