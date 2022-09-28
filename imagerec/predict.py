@@ -16,10 +16,7 @@ model_weights_folder: Path = get_path_to(weights)
 best_pt_path: Path = model_weights_folder.joinpath(best_pt_filename)
 
 def get_exp_number_from_foldername(exp_name: str) -> int:
-    """Get the experiment number from the experiment name
-
-    Experiment names are: "exp", "exp2", "exp3", ect
-    """
+    """ Get the experiment number from the experiment name experiment names are: "exp", "exp2", "exp3", etc """
     int_string = exp_name[3:]
     if int_string == "":
         return 1
@@ -27,10 +24,7 @@ def get_exp_number_from_foldername(exp_name: str) -> int:
         return int(int_string)
 
 def get_exp_number_from_folderpath(folderpath: Path) -> int:
-    """Get the experiment number from the experiment folder path
-
-    Experiment names are: exp, exp2, exp3, ect
-    """
+    """ Get the experiment number from the experiment name experiment paths are: "exp", "exp2", "exp3", etc """
     return get_exp_number_from_foldername(folderpath.name)
 
 def get_latest_exp_folder_from_detect(detectpath: Path) -> Path:

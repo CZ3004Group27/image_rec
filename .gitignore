@@ -5,4 +5,8 @@ __pycache__/
 *.egg-info
 
 # ignore exps
-imagerec/runs/detect/**/*.jpg
+imagerec/runs/detect/*
+gitImageRecVenv/*
+test_labels/*
+
+!.gitignore
