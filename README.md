@@ -1,6 +1,6 @@
-# How to call image rec package
+# How to use the imagerec package
 
-## Step 1: Install the package in development mode
+## Install the package in development mode
 
 Before you start, it is better to create a virtual environment
 for installation, just in case there is any dependency conflict.
@@ -12,7 +12,7 @@ pip install -e .
 
 This will make the package `imagerec` available for imports.
 
-## Step 2: Note the important scripts
+## Note the important scripts
 
 1. The main package should look like this:
 
@@ -50,7 +50,7 @@ This will make the package `imagerec` available for imports.
     print('result is: ', res)
     ```
 
-    Alternatively, to run the code in the usual way:
+    Alternatively, to run the code in the usual way ():
 
     ```python
     from imagerec.infer import infer, get_image_from
@@ -59,3 +59,19 @@ This will make the package `imagerec` available for imports.
     res = infer(image)
     print('result is: ', res)
     ```
+
+    **Note**: the image should be loaded as RGB PIL Image for the `infer()`
+    function to work correctly. The helper function `get_image_from()` helps to
+    load the image in the correct format. **Use this function instead of
+    `cv2.imread()`.**
+
+## Testing
+
+All the tests are put under `imagerec.tests`. Whenever making any changes to
+the model, ensure that all the tests in this folder still pass.
+
+In the root folder containing `setup.py` file, run
+
+```sh
+python -m unittest discover imagerec.tests
+```

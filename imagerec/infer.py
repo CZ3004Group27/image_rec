@@ -30,7 +30,7 @@ def infer(img) -> str:
     # print(float(output[0][0][4])) # conf score
     return [category[int(output[0][i][-1])] for i in range(len(output[0]))] if len(output[0]) else 'Nothing detected'
 
-# unit-test, or when running this file using `os.popen(python...)`
+# when running this file using `os.popen(python...)`
 if __name__ == "__main__":
     image_path = sys.argv[1]
     img = get_image_from(image_path)
