@@ -5,12 +5,11 @@ from imagerec import weights
 import imagerec
 import numpy as np
 import os
-from PIL import Image
 import cv2
 from matplotlib import pyplot as plt
 import time
 import sys
-from imagerec.helpers import get_path_to
+from imagerec.helpers import get_path_to, get_image_from
 
 # Set all the parameters here
 best_pt_filename = "best.pt"
@@ -21,10 +20,8 @@ imagerec_path = get_path_to(imagerec)
 best_pt_path = model_weights_folder.joinpath(best_pt_filename)
 model = torch.hub.load(str(imagerec_path), 'custom', path=str(best_pt_path), source='local') # local model dont need internet
 
-def get_image_from(image_path: str):
-    return Image.open(image_path)
-
 #Function for single prediction
+#Expect an RGB image. Do note to convert to RGB if image is opened with opencv
 def infer(img) -> str:
     # Do not touch the categories
     category = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'S', 'T', 'U', 'V', 'W',
