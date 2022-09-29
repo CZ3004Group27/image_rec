@@ -1,6 +1,6 @@
-# How to call image rec package
+# How to use the imagerec package
 
-## Step 1: Install the package in development mode
+## Install the package in development mode
 
 Before you start, it is better to create a virtual environment
 for installation, just in case there is any dependency conflict.
@@ -12,7 +12,7 @@ pip install -e .
 
 This will make the package `imagerec` available for imports.
 
-## Step 2: Note the important scripts
+## Note the important scripts
 
 1. The main package should look like this:
 
@@ -25,21 +25,22 @@ This will make the package `imagerec` available for imports.
             - ... and so on
     ```
 
-2. `predict.py` contains the fxn that can draw bounding boxes on images and
-   save these outputs to `./final/run/detect/exp{i}` folder, where `i`
-   represents the number of times the predict is called. This is suitable for
-   week 8 task. To include the function that can draw bounding box, put the
-   following in your code:
+2. `predict.py` contains the function that can draw bounding boxes on images,
+    generate a merged image and
+    save these outputs to `./imagerec/run/detect/exp{i}` folder, where `i`
+    represents the number of times the predict is called. This is suitable for
+    week 8 task. To include the function that can draw bounding box, put the
+    following in your code:
 
     ```python
     img_path = 'path_to_image'
-    os.system(f'python ./final/predict.py {img_path}')
+    os.system(f'python -m imagerec.predict {img_path}')
     ```
 
-    If you want to predict > 1 photo, just put the `path_to_image` as the path to folder containing all the images that you want to predict.
+    **Note**: If you want to predict > 1 photo, just put the `path_to_image` as the path to folder containing all the images that you want to predict.
 
 3. `infer.py` contains the fxn that can infer what the object is without
-   drawing bounding boxes. This is much faster and suitable for week 9 task.
+    drawing bounding boxes. This is much faster and suitable for week 9 task.
 
     To run this function in CLI within python, put the following in your code:
 
@@ -50,7 +51,7 @@ This will make the package `imagerec` available for imports.
     print('result is: ', res)
     ```
 
-    Alternatively, to run the code in the usual way:
+    Alternatively, to run the code in the usual way ():
 
     ```python
     from imagerec.infer import infer, get_image_from
@@ -59,3 +60,19 @@ This will make the package `imagerec` available for imports.
     res = infer(image)
     print('result is: ', res)
     ```
+
+    **Note**: the image should be loaded as RGB PIL Image for the `infer()`
+    function to work correctly. The helper function `get_image_from()` helps to
+    load the image in the correct format. **Use this function instead of
+    `cv2.imread()`.**
+
+## Testing
+
+All the tests are put under `imagerec.tests`. Whenever making any changes to
+the model, ensure that all the tests in this folder still pass.
+
+In the root folder containing `setup.py` file, run
+
+```sh
+python -m unittest discover imagerec.tests
+```
