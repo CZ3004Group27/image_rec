@@ -36,9 +36,13 @@ def merge_image():
     images_names = os.listdir(predicted_folder)
 
     images = []
+    basewidth = 640
     for imageName in images_names:
         imageLocation = predicted_folder.joinpath(imageName)
         img = Image.open(imageLocation)
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        img = img.resize((basewidth,hsize), Image.ANTIALIAS) # resize each image
         images.append(img)
 
     size = len(images)
