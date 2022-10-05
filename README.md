@@ -25,9 +25,12 @@ This will make the package `imagerec` available for imports.
             - ... and so on
     ```
 
-2. `predict.py` contains the function that can draw bounding boxes on images,
+2. Before running the scripts below, remember to remove any folders or files in the 'runs/detect' folder.
+   
+
+3. `predict.py` contains the function that can draw bounding boxes on images,
     generate a merged image and
-    save these outputs to `./imagerec/run/detect/exp{i}` folder, where `i`
+    save these outputs to `./imagerec/runs/detect/exp{i}` folder, where `i`
     represents the number of times the predict is called. This is suitable for
     week 8 task. To include the function that can draw bounding box, put the
     following in your code:
@@ -39,7 +42,7 @@ This will make the package `imagerec` available for imports.
 
     **Note**: If you want to predict > 1 photo, just put the `path_to_image` as the path to folder containing all the images that you want to predict.
 
-3. `infer.py` contains the fxn that can infer what the object is without
+4. `infer.py` contains the fxn that can infer what the object is without
     drawing bounding boxes. This is much faster and suitable for week 9 task.
 
     To run this function in CLI within python, put the following in your code:
