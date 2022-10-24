@@ -79,3 +79,13 @@ In the root folder containing `setup.py` file, run
 ```sh
 python -m unittest discover imagerec.tests
 ```
+
+## Acknowledgements
+
+The models and training pipelines are taken from https://github.com/ultralytics/yolov5
+Originally training in our own local machines, we made a lot of changes to the code structure.
+When the need arose to share the code to collaborate among the group, due to the rush of completing
+the project and having to keep developments private during the course of the CZ3004 module, we did
+not create a proper fork from the YOLOv5 repo. Now, we have tried our best to keep
+the licence intact and made our code public. Do let us know if there is a better way to handle this
+moving forward.
